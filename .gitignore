@@ -1,2 +1,7 @@
-**/.env*
-!**/.env.example
+# environment variables
+.env*
+!.env.example
+
+# miscellaneous
+.DS_Store
+Thumbs.db

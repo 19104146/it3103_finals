@@ -1,110 +1,106 @@
 services:
-  # CRM
+  # CRM - Listening at port 8080
   crm_app:
-    image: docker.io/bitnami/suitecrm:${CRM_APP_VERSION}
+    image: "docker.io/bitnami/suitecrm:${CRM_APP_VERSION}"
     restart: unless-stopped
-    ports:
-      - "${CRM_APP_PORT}:8080"
     networks:
       - app_network
       - crm_db_network
     volumes:
-      - crm_app_data:/bitnami/suitecrm
-      - ./crm/bootstrap.sh:/opt/bitnami/scripts/suitecrm/bootstrap.sh
+      - "crm_app_data:/bitnami/suitecrm"
+      - "./crm/bootstrap.sh:/opt/bitnami/scripts/suitecrm/bootstrap.sh"
     environment:
-      - SUITECRM_USERNAME=${CRM_USERNAME}
-      - SUITECRM_PASSWORD=${CRM_PASSWORD}
-      - SUITECRM_DATABASE_HOST=${CRM_DB_HOST}
-      - SUITECRM_DATABASE_PORT_NUMBER=${CRM_DB_PORT}
-      - SUITECRM_DATABASE_NAME=${CRM_DB_DATABASE}
-      - SUITECRM_DATABASE_USER=${CRM_DB_USER}
-      - SUITECRM_DATABASE_PASSWORD=${CRM_DB_PASSWORD}
+      - "SUITECRM_USERNAME=${CRM_USERNAME}"
+      - "SUITECRM_PASSWORD=${CRM_PASSWORD}"
+      - "SUITECRM_DATABASE_HOST=${CRM_DB_HOST}"
+      - "SUITECRM_DATABASE_PORT_NUMBER=${CRM_DB_PORT}"
+      - "SUITECRM_DATABASE_NAME=${CRM_DB_DATABASE}"
+      - "SUITECRM_DATABASE_USER=${CRM_DB_USER}"
+      - "SUITECRM_DATABASE_PASSWORD=${CRM_DB_PASSWORD}"
     depends_on:
       crm_db:
         condition: service_healthy
         restart: true
 
   crm_db:
-    image: mariadb:11.4
+    image: "mariadb:11.4"
     restart: unless-stopped
     networks:
       - crm_db_network
     volumes:
-      - crm_db_data:/var/lib/mysql
+      - "crm_db_data:/var/lib/mysql"
     environment:
-      - MARIADB_DATABASE=${CRM_DB_DATABASE}
-      - MARIADB_USER=${CRM_DB_USER}
-      - MARIADB_PASSWORD=${CRM_DB_PASSWORD}
-      - MARIADB_ROOT_PASSWORD=${CRM_DB_ROOT_PASSWORD}
+      - "MARIADB_DATABASE=${CRM_DB_DATABASE}"
+      - "MARIADB_USER=${CRM_DB_USER}"
+      - "MARIADB_PASSWORD=${CRM_DB_PASSWORD}"
+      - "MARIADB_ROOT_PASSWORD=${CRM_DB_ROOT_PASSWORD}"
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 5s
       timeout: 1s
       retries: 5
 
-  # IMS
+  # IMS - Listening at port 80
   ims_app:
-    image: snipe/snipe-it:${IMS_APP_VERSION}
+    image: "snipe/snipe-it:${IMS_APP_VERSION}"
     restart: unless-stopped
-    ports:
-      - "${IMS_APP_PORT}:80"
     networks:
       - app_network
       - ims_db_network
     volumes:
-      - ims_app_data:/var/lib/snipeit
+      - "ims_app_data:/var/lib/snipeit"
     environment:
-      - APP_ENV=${IMS_APP_ENV}
-      - APP_DEBUG=${IMS_APP_DEBUG}
-      - APP_KEY=${IMS_APP_KEY}
-      - APP_URL=${IMS_APP_URL}
-      - APP_TIMEZONE=${IMS_APP_TIMEZONE}
-      - APP_LOCALE=${IMS_APP_LOCALE}
-      - MAX_RESULTS=${IMS_MAX_RESULTS}
-      - PRIVATE_FILESYSTEM_DISK=${IMS_PRIVATE_FILESYSTEM_DISK}
-      - PUBLIC_FILESYSTEM_DISK=${IMS_PUBLIC_FILESYSTEM_DISK}
-      - DB_CONNECTION=${IMS_DB_CONNECTION}
-      - DB_HOST=${IMS_DB_HOST}
-      - DB_PORT=${IMS_DB_PORT}
-      - DB_DATABASE=${IMS_DB_DATABASE}
-      - DB_USERNAME=${IMS_DB_USER}
-      - DB_PASSWORD=${IMS_DB_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${IMS_MYSQL_ROOT_PASSWORD}
-      - DB_PREFIX=${IMS_DB_PREFIX}
-      - DB_DUMP_PATH=${IMS_DB_DUMP_PATH}
-      - DB_CHARSET=${IMS_DB_CHARSET}
-      - DB_COLLATION=${IMS_DB_COLLATION}
-      - MAIL_MAILER=${IMS_MAIL_MAILER}
-      - MAIL_HOST=${IMS_MAIL_HOST}
-      - MAIL_PORT=${IMS_MAIL_PORT}
-      - MAIL_USERNAME=${IMS_MAIL_USERNAME}
-      - MAIL_PASSWORD=${IMS_MAIL_PASSWORD}
-      - MAIL_TLS_VERIFY_PEER=${IMS_MAIL_TLS_VERIFY_PEER}
-      - MAIL_FROM_ADDR=${IMS_MAIL_FROM_ADDR}
-      - MAIL_FROM_NAME=${IMS_MAIL_FROM_NAME}
-      - MAIL_REPLYTO_ADDR=${IMS_MAIL_REPLYTO_ADDR}
-      - MAIL_REPLYTO_NAME=${IMS_MAIL_REPLYTO_NAME}
-      - MAIL_AUTO_EMBED_METHOD=${IMS_MAIL_AUTO_EMBED_METHOD}
-      - ALLOW_BACKUP_DELETE=${IMS_ALLOW_BACKUP_DELETE}
-      - ALLOW_DATA_PURGE=${IMS_ALLOW_DATA_PURGE}
-      - IMAGE_LIB=${IMS_IMAGE_LIB}
+      - "APP_ENV=${IMS_APP_ENV}"
+      - "APP_DEBUG=${IMS_APP_DEBUG}"
+      - "APP_KEY=${IMS_APP_KEY}"
+      - "APP_URL=${IMS_APP_URL}"
+      - "APP_TIMEZONE=${IMS_APP_TIMEZONE}"
+      - "APP_LOCALE=${IMS_APP_LOCALE}"
+      - "MAX_RESULTS=${IMS_MAX_RESULTS}"
+      - "PRIVATE_FILESYSTEM_DISK=${IMS_PRIVATE_FILESYSTEM_DISK}"
+      - "PUBLIC_FILESYSTEM_DISK=${IMS_PUBLIC_FILESYSTEM_DISK}"
+      - "DB_CONNECTION=${IMS_DB_CONNECTION}"
+      - "DB_HOST=${IMS_DB_HOST}"
+      - "DB_PORT=${IMS_DB_PORT}"
+      - "DB_DATABASE=${IMS_DB_DATABASE}"
+      - "DB_USERNAME=${IMS_DB_USER}"
+      - "DB_PASSWORD=${IMS_DB_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=${IMS_MYSQL_ROOT_PASSWORD}"
+      - "DB_PREFIX=${IMS_DB_PREFIX}"
+      - "DB_DUMP_PATH=${IMS_DB_DUMP_PATH}"
+      - "DB_CHARSET=${IMS_DB_CHARSET}"
+      - "DB_COLLATION=${IMS_DB_COLLATION}"
+      - "MAIL_MAILER=${IMS_MAIL_MAILER}"
+      - "MAIL_HOST=${IMS_MAIL_HOST}"
+      - "MAIL_PORT=${IMS_MAIL_PORT}"
+      - "MAIL_USERNAME=${IMS_MAIL_USERNAME}"
+      - "MAIL_PASSWORD=${IMS_MAIL_PASSWORD}"
+      - "MAIL_TLS_VERIFY_PEER=${IMS_MAIL_TLS_VERIFY_PEER}"
+      - "MAIL_FROM_ADDR=${IMS_MAIL_FROM_ADDR}"
+      - "MAIL_FROM_NAME=${IMS_MAIL_FROM_NAME}"
+      - "MAIL_REPLYTO_ADDR=${IMS_MAIL_REPLYTO_ADDR}"
+      - "MAIL_REPLYTO_NAME=${IMS_MAIL_REPLYTO_NAME}"
+      - "MAIL_AUTO_EMBED_METHOD=${IMS_MAIL_AUTO_EMBED_METHOD}"
+      - "ALLOW_BACKUP_DELETE=${IMS_ALLOW_BACKUP_DELETE}"
+      - "ALLOW_DATA_PURGE=${IMS_ALLOW_DATA_PURGE}"
+      - "IMAGE_LIB=${IMS_IMAGE_LIB}"
     depends_on:
       ims_db:
         condition: service_healthy
         restart: true
 
   ims_db:
-    image: mariadb:11.4
+    image: "mariadb:11.4"
     restart: unless-stopped
     networks:
       - ims_db_network
     volumes:
-      - ims_db_data:/var/lib/mysql
+      - "ims_db_data:/var/lib/mysql"
     environment:
-      - MYSQL_DATABASE=${IMS_DB_DATABASE}
-      - MYSQL_USER=${IMS_DB_USER}
-      - MYSQL_PASSWORD=${IMS_DB_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${IMS_MYSQL_ROOT_PASSWORD}
+      - "MYSQL_DATABASE=${IMS_DB_DATABASE}"
+      - "MYSQL_USER=${IMS_DB_USER}"
+      - "MYSQL_PASSWORD=${IMS_DB_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=${IMS_MYSQL_ROOT_PASSWORD}"
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 5s
