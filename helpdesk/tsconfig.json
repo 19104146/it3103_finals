@@ -1,6 +1,15 @@
 {
-  "extends": "@tsconfig/node22/tsconfig.json",
-  "compilerOptions": {},
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "strict": true,
+    "sourceMap": true
+  },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }

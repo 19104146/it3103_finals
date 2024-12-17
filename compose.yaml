@@ -107,6 +107,21 @@ services:
       timeout: 1s
       retries: 5
 
+  # Helpdesk - Listening at port 3000
+  helpdesk:
+    build:
+      context: "./helpdesk"
+      target: runner
+    environment:
+      - "CRM_API_URL=${HELPDESK_CRM_API_URL}"
+      - "CRM_API_KEY=${HELPDESK_CRM_API_KEY}"
+      - "IMS_API_URL=${HELPDESK_IMS_API_URL}"
+      - "IMS_API_KEY=${HELPDESK_IMS_API_KEY}"
+    networks:
+      - app_network
+    volumes:
+      - "./helpdesk/sqlite.db:/app/sqlite.db"
+
 networks:
   app_network:
   crm_db_network:
