@@ -4,8 +4,9 @@ import { logger } from "hono/logger"
 import { trimTrailingSlash } from "hono/trailing-slash"
 import { env } from "./config/env"
 import { auth } from "./routes/auth.route"
-import { ticket } from "./routes/ticket.route"
 import { customer } from "./routes/customer.route"
+import { stock } from "./routes/stock.route"
+import { ticket } from "./routes/ticket.route"
 
 const app = new Hono()
 
@@ -19,7 +20,7 @@ app.use("*", (c, next) => {
 
 app.route("/", auth)
 app.route("/customers", customer)
-// app.route("/stocks", stock)
+app.route("/stocks", stock)
 app.route("/tickets", ticket)
 
 export default {

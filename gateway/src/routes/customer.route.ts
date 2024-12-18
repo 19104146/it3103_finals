@@ -39,7 +39,7 @@ customer
       },
     }
 
-    const data = await crmApi.post(`legacy/Api/V8/module`, { json: body }).json<Record<string, unknown>>()
+    const data = await crmApi.post("legacy/Api/V8/module", { json: body }).json<Record<string, unknown>>()
     return c.json(data)
   })
   .delete("/:id", async (c) => {
