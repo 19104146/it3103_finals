@@ -29,7 +29,7 @@ customer
     const data = await crmApi.get(`legacy/Api/V8/module/Accounts/${id}`).json<Record<string, unknown>>()
     return c.json(data)
   })
-  .patch("/:id", async (c) => {
+  .patch(async (c) => {
     const id = c.req.param("id")
     const body = {
       data: {
@@ -42,7 +42,7 @@ customer
     const data = await crmApi.patch("legacy/Api/V8/module", { json: body }).json<Record<string, unknown>>()
     return c.json(data)
   })
-  .delete("/:id", async (c) => {
+  .delete(async (c) => {
     const id = c.req.param("id")
     const data = await crmApi.delete(`legacy/Api/V8/module/Accounts/${id}`).json<Record<string, unknown>>()
     return c.json(data)
