@@ -14,11 +14,14 @@ docker compose up --build -d
 ### Set Up SuiteCRM (CRM)
 
 1. Generate OAuth2 client keys:
+
    ```sh
    docker exec -it {CONTAINER_ID} bash
    root@{CONTAINER_ID}:/# ./opt/bitnami/scripts/suitecrm/bootstrap.sh
    ```
+
    > [!NOTE]
+   >
    > - Use the docker image `bitnami/suitecrm:8.7.1`
    > - Replace `{CONTAINER_ID}` with the actual container ID from `docker ps`
 
@@ -27,6 +30,7 @@ docker compose up --build -d
 3. Log in using the `CRM_USERNAME` and `CRM_PASSWORD` from your `.env` file
 
 4. Configure OAuth2 Client Credentials:
+
    - Click the user icon in the upper right corner
    - Select "Admin"
    - Navigate to **Users & Authentication**
@@ -36,10 +40,12 @@ docker compose up --build -d
    - Create the client
 
 5. Secure your credentials:
+
    - Copy the generated **Client ID**
    - Safely store the **Client Secret**
 
 6. Obtain an API Access Token:
+
    - Use Postman or Bruno as your API client
    - Select OAuth2 Credentials
    - Set Access Token URL to `http://localhost:8001/legacy/Api/access_token`
@@ -56,6 +62,7 @@ docker compose up --build -d
 2. Complete the initial setup wizard
 
 3. Generate API Key:
+
    - Click the account button in the navigation bar
    - Select **Manage API Keys**
    - Create and copy your API key

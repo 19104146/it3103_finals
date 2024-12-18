@@ -5,7 +5,19 @@ meta {
 }
 
 post {
-  url: 
-  body: none
-  auth: none
+  url: http://localhost:8000/tickets
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc4YWY3OGFkLWYxN2EtNDY2YS04ODFhLTYwNGMwYzlmNTU5MiIsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4ifQ.-DUWWU9xgGeS2R09k7TOeLn1qBWnW3Wohp6QszF0SDI
+}
+
+body:json {
+  {
+    "createdBy": "14cfe3f1-c132-d63d-cd09-6761a6bc4070",
+    "title": "I'm a freak",
+    "description": "Issue description here."
+  }
 }
