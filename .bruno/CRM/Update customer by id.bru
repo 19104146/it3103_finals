@@ -1,15 +1,21 @@
 meta {
-  name: Get customer by id
+  name: Update customer by id
   type: http
-  seq: 3
+  seq: 4
 }
 
-get {
+patch {
   url: http://localhost:8000/customers/1bae0273-c9ef-1158-a9cf-6762df2c07e5
-  body: none
+  body: json
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc4YWY3OGFkLWYxN2EtNDY2YS04ODFhLTYwNGMwYzlmNTU5MiIsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4ifQ.-DUWWU9xgGeS2R09k7TOeLn1qBWnW3Wohp6QszF0SDI
+}
+
+body:json {
+  {
+    "name": "Achille Lanutan"
+  }
 }

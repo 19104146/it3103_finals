@@ -1,6 +1,5 @@
 import { eq } from "drizzle-orm"
 import { Hono } from "hono"
-import { crmApi, imsApi } from "../config/api"
 import { db } from "../db"
 import { tickets } from "../db/schema"
 import { insertTicketSchema } from "../types/ticket.type"
@@ -14,15 +13,15 @@ ticket
       const body = await c.req.json()
       const data = insertTicketSchema.parse(body)
 
-      await crmApi.get(`legacy/Api/V8/module/Accounts/${data.createdBy}`).json()
+      // await crmApi.get(`legacy/Api/V8/module/Accounts/${data.createdBy}`).json()
 
-      if (data.salesId) {
-        await crmApi.get(`legacy/Api/V8/module/Quotes/${data.salesId}`).json()
-        data.issueType = "sales"
-      } else if (data.productId) {
-        await imsApi.get(`hardware/${data.productId}`).json()
-        data.issueType = "product"
-      }
+      // if (data.salesId) {
+      //   await crmApi.get(`legacy/Api/V8/module/Quotes/${data.salesId}`).json()
+      //   data.issueType = "sales"
+      // } else if (data.productId) {
+      //   await imsApi.get(`api/v1/hardware/${data.productId}`).json()
+      //   data.issueType = "product"
+      // }
 
       return c.json((await db.insert(tickets).values(data).returning())[0], { status: 201 })
     } catch (error) {

@@ -1,0 +1,35 @@
+meta {
+  name: Update stock by id
+  type: http
+  seq: 4
+}
+
+patch {
+  url: http://localhost:8000/stocks/198
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc4YWY3OGFkLWYxN2EtNDY2YS04ODFhLTYwNGMwYzlmNTU5MiIsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4ifQ.-DUWWU9xgGeS2R09k7TOeLn1qBWnW3Wohp6QszF0SDI
+}
+
+body:json {
+  {
+    "asset_tag": "ASSET-001",
+    "notes": "Updated asset notes.",
+    "status_id": 2,
+    "model_id": 1,
+    "last_checkout": "2024-01-10",
+    "assigned_user": 3,
+    "assigned_location": 5,
+    "serial": "SN123456789",
+    "order_number": "ORD-78910",
+    "warranty_months": 24,
+    "purchase_cost": 1200.00,
+    "purchase_date": "2024-01-15",
+    "requestable": true,
+    "archived": false,
+    "name": "Ean's Axe"
+  }
+}

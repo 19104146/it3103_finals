@@ -22,7 +22,6 @@ services:
     depends_on:
       crm_db:
         condition: service_healthy
-        restart: true
 
   crm_db:
     image: "mariadb:11.4"
@@ -91,7 +90,6 @@ services:
     depends_on:
       ims_db:
         condition: service_healthy
-        restart: true
 
   ims_db:
     image: "mariadb:11.4"

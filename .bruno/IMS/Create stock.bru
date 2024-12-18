@@ -1,0 +1,27 @@
+meta {
+  name: Create stock
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/stocks
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc4YWY3OGFkLWYxN2EtNDY2YS04ODFhLTYwNGMwYzlmNTU5MiIsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4ifQ.-DUWWU9xgGeS2R09k7TOeLn1qBWnW3Wohp6QszF0SDI
+}
+
+body:json {
+  {
+    "name": "New Asset Name",
+    "serial": "new-asset-name",
+    "purchase_date": "2024-01-15",
+    "purchase_cost": 299.99,
+    "order_number": "ORD-123456",
+    "status_id": 999,
+    "supplier_id": 2
+  }
+}
