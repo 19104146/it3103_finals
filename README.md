@@ -20,10 +20,10 @@ docker compose up --build -d
    root@{CONTAINER_ID}:/# ./opt/bitnami/scripts/suitecrm/bootstrap.sh
    ```
 
-   > [!NOTE]
-   >
-   > - Use the docker image `bitnami/suitecrm:8.7.1`
-   > - Replace `{CONTAINER_ID}` with the actual container ID from `docker ps`
+> [!NOTE]
+>
+> - Use the docker image `bitnami/suitecrm:8.7.1`
+> - Replace `{CONTAINER_ID}` with the actual container ID from `docker ps`
 
 2. Access SuiteCRM at `http://localhost:8001`
 
