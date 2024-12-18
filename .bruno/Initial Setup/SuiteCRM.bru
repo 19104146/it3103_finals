@@ -1,0 +1,19 @@
+meta {
+  name: SuiteCRM
+  type: http
+  seq: 1
+}
+
+get {
+  url: 
+  body: none
+  auth: oauth2
+}
+
+auth:oauth2 {
+  grant_type: client_credentials
+  access_token_url: http://localhost:8001/legacy/Api/access_token
+  client_id: 74ebcc87-0b72-1c4f-6eea-6762c7fd07d8
+  client_secret: admin
+  scope: 
+}

@@ -5,6 +5,7 @@ import { trimTrailingSlash } from "hono/trailing-slash"
 import { env } from "./config/env"
 import { auth } from "./routes/auth.route"
 import { ticket } from "./routes/ticket.route"
+import { customer } from "./routes/customer.route"
 
 const app = new Hono()
 
@@ -13,12 +14,11 @@ app.use(trimTrailingSlash())
 app.use("*", (c, next) => {
   const path = c.req.path
   if (path === "/register" || path === "/login") return next()
-  return jwt({ secret: env.JWT_SECRET! })(c, next)
+  return jwt({ secret: env.JWT_SECRET })(c, next)
 })
 
 app.route("/", auth)
-// app.route("/customers", customer)
-// app.route("/sales", sale)
+app.route("/customers", customer)
 // app.route("/stocks", stock)
 app.route("/tickets", ticket)
 

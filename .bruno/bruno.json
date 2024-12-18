@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "IT 3103 Finals",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

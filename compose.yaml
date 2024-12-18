@@ -1,8 +1,10 @@
 services:
-  # CRM - Listening at port 8080
+  # CRM
   crm_app:
     image: "docker.io/bitnami/suitecrm:${CRM_APP_VERSION}"
     restart: unless-stopped
+    ports:
+      - "8001:8080"
     networks:
       - app_network
       - crm_db_network
@@ -44,6 +46,8 @@ services:
   ims_app:
     image: "snipe/snipe-it:${IMS_APP_VERSION}"
     restart: unless-stopped
+    ports:
+      - "8002:80"
     networks:
       - app_network
       - ims_db_network
