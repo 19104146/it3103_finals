@@ -136,6 +136,7 @@ services:
       - CRM_API_KEY
       - IMS_API_URL
       - IMS_API_KEY
+      - HELPDESK_API_URL
       - JWT_SECRET
 
 networks:
