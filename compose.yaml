@@ -111,7 +111,6 @@ services:
   helpdesk:
     build:
       context: "./helpdesk"
-      target: runner
     environment:
       - "CRM_API_URL=${HELPDESK_CRM_API_URL}"
       - "CRM_API_KEY=${HELPDESK_CRM_API_KEY}"
