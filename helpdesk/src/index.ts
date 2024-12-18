@@ -1,24 +1,13 @@
-import sensible from "@fastify/sensible"
-import fastify from "fastify"
-import { env } from "./config/env.js"
-import { ticketRoutes } from "./routes/tickets.js"
+import { Hono } from "hono"
+import { logger } from "hono/logger"
+import { trimTrailingSlash } from "hono/trailing-slash"
+import { ticket } from "./routes/ticket.route"
 
-const server = fastify({ logger: true })
+const app = new Hono()
 
-server.register(sensible)
-server.register(ticketRoutes, { prefix: "/tickets" })
+app.use(logger())
+app.use(trimTrailingSlash())
 
-server.listen(
-  {
-    port: 3000,
-    host: env.NODE_ENV === "production" ? "0.0.0.0" : "localhost",
-  },
-  (error, address) => {
-    if (error) {
-      console.error(error)
-      process.exit(1)
-    }
+app.route("/tickets", ticket)
 
-    console.log(`Server listening at ${address}`)
-  },
-)
+export default app

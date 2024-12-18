@@ -1,8 +1,2 @@
-# dependencies
 node_modules/
-
-# production
-dist/
-
-# database
-sqlite.db*
+sqlite.db
