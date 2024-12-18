@@ -111,15 +111,33 @@ services:
   helpdesk:
     build:
       context: "./helpdesk"
-    environment:
-      - "CRM_API_URL=${HELPDESK_CRM_API_URL}"
-      - "CRM_API_KEY=${HELPDESK_CRM_API_KEY}"
-      - "IMS_API_URL=${HELPDESK_IMS_API_URL}"
-      - "IMS_API_KEY=${HELPDESK_IMS_API_KEY}"
     networks:
       - app_network
     volumes:
       - "./helpdesk/sqlite.db:/app/sqlite.db"
+    environment:
+      - CRM_API_URL
+      - CRM_API_KEY
+      - IMS_API_URL
+      - IMS_API_KEY
+
+  # Gateway
+  gateway:
+    build:
+      context: "./gateway"
+    ports:
+      - "8000:8000"
+    networks:
+      - app_network
+    volumes:
+      - "./gateway/sqlite.db:/app/sqlite.db"
+    environment:
+      - CRM_API_URL
+      - CRM_API_KEY
+      - IMS_API_URL
+      - IMS_API_KEY
+      - HELPDESK_API_URL
+      - JWT_SECRET
 
 networks:
   app_network:
