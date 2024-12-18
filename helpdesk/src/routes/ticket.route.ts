@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 import { db } from "../db"
 import { tickets } from "../db/schema"
-import { insertTicketSchema } from "../types/ticket.type"
+import { insertTicketSchema, selectTicketSchema } from "../types/ticket.type"
 
 export const ticket = new Hono()
 
@@ -48,7 +48,7 @@ ticket
     const id = c.req.param("id")
 
     try {
-      const data = insertTicketSchema.partial().parse(c.body)
+      const data = selectTicketSchema.partial().parse(await c.req.json())
       const updatedTicket = await db.update(tickets).set(data).where(eq(tickets.id, id)).returning()
       if (updatedTicket.length === 0) return c.json({ message: "Ticket not found" }, { status: 404 })
       return c.json(updatedTicket[0])
@@ -60,9 +60,8 @@ ticket
     const id = c.req.param("id")
 
     try {
-      const deletedTicket = await db.delete(tickets).where(eq(tickets.id, id)).returning()
-      if (deletedTicket.length === 0) return c.json({ message: "Ticket does not exist" }, { status: 404 })
-      return c.json({ message: "Ticket deleted successfully" }, { status: 204 })
+      await db.delete(tickets).where(eq(tickets.id, id))
+      return c.json({ message: "ticket deleted successfully" }, { status: 204 })
     } catch (error) {
       return c.json({ message: error instanceof Error ? error.message : "Something went wrong" }, { status: 500 })
     }

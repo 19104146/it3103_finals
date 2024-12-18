@@ -21,13 +21,13 @@ ticket
     const data = await helpdeskApi.get(`tickets/${id}`).json<Record<string, unknown>>()
     return c.json(data)
   })
-  .put("/:id", checkRoles(["admin"]), async (c) => {
+  .put(checkRoles(["admin"]), async (c) => {
     const id = c.req.param("id")
     const body = await c.req.json()
     const data = await helpdeskApi.put(`tickets/${id}`, { json: body }).json<Record<string, unknown>>()
     return c.json(data)
   })
-  .delete("/:id", checkRoles(["admin"]), async (c) => {
+  .delete(checkRoles(["admin"]), async (c) => {
     const id = c.req.param("id")
     const data = await helpdeskApi.delete(`tickets/${id}`).json<Record<string, unknown>>()
     return c.json(data)
